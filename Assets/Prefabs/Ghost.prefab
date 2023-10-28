@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2662111368509907984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.26, y: -0.87, z: 0}
+  m_LocalPosition: {x: -3.3965542, y: -2.0252254, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,10 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc76fcce1e46496cb8d681bcc143f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostSpeed: 2
-  ghostAccel: 1.01
-  health: 3
-  opacity: 0.75
+  ghostSpeed: 1
 --- !u!50 &4889670228419660757
 Rigidbody2D:
   serializedVersion: 4

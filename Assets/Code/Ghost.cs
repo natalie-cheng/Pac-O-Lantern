@@ -8,20 +8,17 @@ public class Ghost : MonoBehaviour
     /// Used to find the player's position
     private Transform player;
 
-    /// Vector from us to the player
-    private Vector2 OffsetToPlayer => player.position - transform.position;
-
-    /// Unit vector in the direction of the player, relative to us
-    private Vector2 HeadingToPlayer => OffsetToPlayer.normalized;
+    private Vector2 playerDir;
+    private float playerDist;
 
     /// ghost movement
-    public float ghostSpeed = 1;
-    public float ghostAccel = 1.005f;
+    private float ghostSpeed; 
+    private float ghostAccel = 1.005f;
     private Vector2 acceleration;
 
     // ghost stats
-    public float health = 3;
-    public float opacity = 0.75f;
+    private float health = 3;
+    private float opacity = 0.75f;
 
     // ghost rigidbody
     private Rigidbody2D rb;
@@ -37,15 +34,18 @@ public class Ghost : MonoBehaviour
         // initialize ghost vars
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        ghostSpeed = 1;
         acceleration = new Vector2(ghostAccel, ghostAccel);
     }
 
     // FixedUpdate is based on physics update
     private void FixedUpdate()
     {
-        var offsetToPlayer = OffsetToPlayer;
-        var distanceToPlayer = offsetToPlayer.magnitude;
-        rb.AddForce((ghostSpeed / distanceToPlayer) * offsetToPlayer * acceleration);
+        // direction of the player
+        playerDir = player.position - transform.position;
+        // distance to player
+        playerDist = playerDir.magnitude;
+        rb.AddForce((ghostSpeed / playerDist) * playerDir * acceleration);
 
         // change the sprite orientation depending on direction
         if (rb.velocity.x > 0)

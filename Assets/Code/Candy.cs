@@ -10,7 +10,8 @@ public class Candy : MonoBehaviour
         // if colliding with a pumpkin
         if (collision.collider.name.Contains("Pumpkin"))
         {
-            // add a point to scorekeeper
+            // add a point to score
+            UI.IncreaseScore();
             // play sound
             // destroy the candy
             Destroy(gameObject);

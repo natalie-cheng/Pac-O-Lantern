@@ -7,14 +7,15 @@ public class GhostSpawner : MonoBehaviour
     // ghost prefab
     public GameObject ghostPrefab;
 
-    // time between spawns
-    public float spawnTime = 15;
+    // time between spawns, rate of spawn frequency
+    private float spawnTime;
+    private float spawnSpeed = 0.95f;
 
     // radius of free space needed
-    public float radius = 10;
+    private float radius = 15;
 
     // tracking time
-    public float currentTime = 0;
+    private float currentTime;
 
     // window dims
     public Vector2 min;
@@ -26,6 +27,10 @@ public class GhostSpawner : MonoBehaviour
         // initialize dims
         min = Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
         max = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        // initialize the current times
+        currentTime = Time.time;
+        spawnTime = 15;
     }
 
     // frame update
@@ -42,6 +47,8 @@ public class GhostSpawner : MonoBehaviour
 
             // add spawntime seconds
             currentTime += spawnTime;
+            // reduce spawtime
+            spawnTime *= spawnSpeed;
         }
     }
 
