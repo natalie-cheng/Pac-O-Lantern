@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    /// Transform from the player object
-    /// Used to find the player's position
+    // transform of player, finds player position
     private Transform player;
 
+    // direction and distance of the player
     private Vector2 playerDir;
     private float playerDist;
 
@@ -41,20 +41,29 @@ public class Ghost : MonoBehaviour
     // FixedUpdate is based on physics update
     private void FixedUpdate()
     {
-        // direction of the player
-        playerDir = player.position - transform.position;
-        // distance to player
-        playerDist = playerDir.magnitude;
-        rb.AddForce((ghostSpeed / playerDist) * playerDir * acceleration);
-
-        // change the sprite orientation depending on direction
-        if (rb.velocity.x > 0)
+        // check if the game is over to destroy spawner
+        if (UI.isGameOver)
         {
-            spriteRenderer.flipX = true;
+            Destroy(gameObject);
         }
+        // otherwise ghost moves
         else
         {
-            spriteRenderer.flipX = false;
+            // direction of the player
+            playerDir = player.position - transform.position;
+            // distance to player
+            playerDist = playerDir.magnitude;
+            rb.AddForce((ghostSpeed / playerDist) * playerDir * acceleration);
+
+            // change the sprite orientation depending on direction
+            if (rb.velocity.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
     }
 
@@ -82,10 +91,8 @@ public class Ghost : MonoBehaviour
         // if colliding with a pumpkin
         if (collision.collider.name.Contains("Pumpkin"))
         {
-            // play sound
             // destroy object
             Destroy(gameObject);
-            // game over?
         }
         // if colliding with a fireball
         else if (collision.collider.name.Contains("Fireball"))

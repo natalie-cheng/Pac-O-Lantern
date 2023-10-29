@@ -14,6 +14,11 @@ public class Pumpkin : MonoBehaviour
     // speed of fireball
     public float ballSpeed = 5;
 
+    // score audio
+    private AudioSource sfx;
+    public AudioClip scoreBeep;
+    public AudioClip ghostWhoosh;
+
     // cool down for shooting
     private float coolDownTime = 0.3f;
     private float currentTime;
@@ -32,11 +37,19 @@ public class Pumpkin : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // initialize the current time
         currentTime = Time.time;
+        // initialize audio
+        sfx = GetComponent<AudioSource>();
     }
 
     // frame update
     private void Update()
     {
+        // check if the game is over to destroy pumpkin
+        if (UI.isGameOver)
+        {
+            Destroy(gameObject);
+        }
+
         // always moving
         Move();
         // check if shooting
@@ -49,23 +62,6 @@ public class Pumpkin : MonoBehaviour
     // move pumpkin around maze
     private void Move()
     {
-        //if (Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //    rb.velocity = Vector2.right * pumpkinSpeed;
-        //}
-        //if (Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    rb.velocity = Vector2.left * pumpkinSpeed;
-        //}
-        //if (Input.GetKeyDown(KeyCode.UpArrow))
-        //{
-        //    rb.velocity = Vector2.up * pumpkinSpeed;
-        //}
-        //if (Input.GetKeyDown(KeyCode.DownArrow))
-        //{
-        //    rb.velocity = Vector2.down * pumpkinSpeed;
-        //}
-
         // horizontal and vertical input axes
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -85,8 +81,6 @@ public class Pumpkin : MonoBehaviour
         // if enough time has passed since last fireball shot
         if ((Time.time - currentTime) > coolDownTime)
         {
-            //Debug.Log(transform.position);
-            //Vector3 position = new Vector3(transform.position.x*shootAdjust, transform.position.y, transform.position.z);
             // instantiate ball
             GameObject ball = Instantiate(BallPrefab, transform.position, transform.rotation * rotateAdjust);
 
@@ -106,8 +100,17 @@ public class Pumpkin : MonoBehaviour
         {
             // lose a life
             health--;
+            // play ghost whoosh
+            sfx.PlayOneShot(ghostWhoosh, 1);
             // adjust health
             UI.ChangeHealth(health);
+        }
+
+        // if colliding with candy
+        else if (collision.collider.name.Contains("Candy"))
+        {
+            // play score beep
+            sfx.PlayOneShot(scoreBeep, 1);
         }
     }
 }

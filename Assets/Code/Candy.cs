@@ -12,7 +12,6 @@ public class Candy : MonoBehaviour
         {
             // add a point to score
             UI.IncreaseScore();
-            // play sound
             // destroy the candy
             Destroy(gameObject);
         }

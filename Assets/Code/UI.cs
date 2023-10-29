@@ -14,32 +14,32 @@ public class UI : MonoBehaviour
     //public TextMeshProUGUI gameOverText;
     public GameObject gameOverUI;
     public TextMeshProUGUI gameOverText;
+    public static bool isGameOver;
 
     // health heart 1,2,3
-    // https://nicolemariet.itch.io/pixel-heart-animation-32x32-16x16-freebie
     public Image heart1;
     public Image heart2;
     public Image heart3;
 
-    //private Sprite emptyHeart;
-
     // number of candies on the screen
-    private int numCandies = 0;
+    private int numCandies;
 
     // track score
-    private int score = 0;
+    private int score;
 
+    // audio
+    public AudioSource sfx;
+    public AudioClip loseSfx;
+    public AudioClip winSfx;
 
     // call start
     private void Start()
     {
         // initialize object
         Singleton = this;
-        // initialize score display
-        scoreText.text = "Score 0";
-
-        // initialize empty heart
-        //emptyHeart = Resources.Load<Sprite>("Hearts/Hearts_2");
+        // initialize score 
+        scoreText.text = "Score0";
+        score = 0;
 
         // store the number of candies in scene
         numCandies = FindObjectsOfType<Candy>().Length;
@@ -47,7 +47,11 @@ public class UI : MonoBehaviour
         // disable the gameover screen to start
         gameOverUI.SetActive(false);
 
-        //gameOverText.text = "";
+        // game begins
+        isGameOver = false;
+
+        //initialize audio
+        //sfx = GetComponent<AudioSource>();
     }
 
     // increase score, static method
@@ -61,12 +65,12 @@ public class UI : MonoBehaviour
     {
         // add to score, update text display
         score++;
-        scoreText.text = "Score " + score;
+        scoreText.text = "Score" + score;
 
-        //if (score == numCandies)
-        //{
-        //    GameOver(true);
-        //}
+        if (score == numCandies)
+        {
+            GameOver(true);
+        }
     }
 
     // change health images, static method
@@ -97,28 +101,43 @@ public class UI : MonoBehaviour
         }
     }
 
+    // game over ui
     public void GameOver(bool win)
     {
+        // activate the game over screen
+        isGameOver = true;
         gameOverUI.SetActive(true);
+
+        // display the message and score, play audio
         if (win)
         {
             gameOverText.text = "Congrats! You Won!\n";
+            sfx.PlayOneShot(winSfx, 1);
         }
         else
         {
-            gameOverText.text = "Oh no.. You lost.. :(\n";
+            gameOverText.text = "Oh no... You lost... :(\n";
+            sfx.PlayOneShot(loseSfx, 1);
         }
-        gameOverText.text += "Score: " + score;
+        gameOverText.text += "\nScore: " + score;
 
     }
 
+    // restart button
     public void Restart()
     { 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // menu button
     public void Menu()
     {
+        SceneManager.LoadScene("Menu");
+    }
 
+    // quit button
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

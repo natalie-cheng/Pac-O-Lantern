@@ -8,7 +8,7 @@ public class GhostSpawner : MonoBehaviour
     public GameObject ghostPrefab;
 
     // time between spawns, rate of spawn frequency
-    private float spawnTime;
+    private float spawnTime = 15;
     private float spawnSpeed = 0.95f;
 
     // radius of free space needed
@@ -30,12 +30,17 @@ public class GhostSpawner : MonoBehaviour
 
         // initialize the current times
         currentTime = Time.time;
-        spawnTime = 15;
     }
 
     // frame update
     void Update()
     {
+        // check if the game is over to destroy spawner
+        if (UI.isGameOver)
+        {
+            Destroy(gameObject);
+        }
+
         // if enough spawntime has passed
         if (Time.time > currentTime)
         {

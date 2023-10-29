@@ -1,0 +1,24 @@
+Pumpkin Sprite:
+https://opengameart.org/content/pumpkin
+Ghost Sprite:
+https://ossiron.itch.io/pixel-ghost
+Candy Sprite:
+https://opengameart.org/content/blinking-candy
+Fireball Sprite:
+https://weisinx7.itch.io/fireballs-sprites
+Hearts Sprite:
+https://nicolemariet.itch.io/pixel-heart-animation-32x32-16x16-freebie
+Background:
+https://stock.adobe.com/images/ground-pattern-pixel-art-illustration/103323519
+Fonts:
+https://www.1001fonts.com/halloween-spooky-font.html
+Score Beep SFX:
+https://mixkit.co/free-sound-effects/game/?page=2
+Ghost Whoosh SFX:
+https://opengameart.org/content/energy-drain
+Game Over (Lose) SFX:
+https://mixkit.co/free-sound-effects/game-over/
+Game Over (Win) SFX:
+https://mixkit.co/free-sound-effects/game-over/
+Background Music:
+https://www.void1gaming.com/free-horror-music-pack
