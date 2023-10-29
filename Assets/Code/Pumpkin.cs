@@ -68,11 +68,24 @@ public class Pumpkin : MonoBehaviour
 
         // set the direction, increase by speed
         Vector2 vec = new Vector2(horizontal, vertical);
+
         rb.velocity = vec * pumpkinSpeed;
 
         // take in input rotation and adjust
-        float rotate = Input.GetAxis("Rotate");
-        rb.angularVelocity = rotate * rotateSpeed;
+        // controller input
+        float rotate1 = Input.GetAxis("Rotate_Controller");
+        rb.angularVelocity = rotate1 * rotateSpeed;
+        if (rotate1 != 0)
+        {
+            rb.angularVelocity = rotate1 * rotateSpeed;
+        }
+
+        // keyboard input
+        float rotate2 = Input.GetAxis("Rotate_Keyboard");
+        if (rotate2 != 0)
+        {
+            rb.angularVelocity = rotate2 * rotateSpeed;
+        }
     }
 
     // shooting a fireball

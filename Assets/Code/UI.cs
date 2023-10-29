@@ -11,10 +11,13 @@ public class UI : MonoBehaviour
     // score display
     public TextMeshProUGUI scoreText;
 
-    //public TextMeshProUGUI gameOverText;
+    // gameover UI
     public GameObject gameOverUI;
     public TextMeshProUGUI gameOverText;
     public static bool isGameOver;
+
+    // paused UI
+    public GameObject pausedUI;
 
     // health heart 1,2,3
     public Image heart1;
@@ -44,14 +47,23 @@ public class UI : MonoBehaviour
         // store the number of candies in scene
         numCandies = FindObjectsOfType<Candy>().Length;
 
-        // disable the gameover screen to start
+        // disable the gameover and paused screens to start
         gameOverUI.SetActive(false);
+        pausedUI.SetActive(false);
 
         // game begins
         isGameOver = false;
+    }
 
-        //initialize audio
-        //sfx = GetComponent<AudioSource>();
+    // frame update
+    private void Update()
+    {
+        // check for pause
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            pausedUI.SetActive(true);
+        }
     }
 
     // increase score, static method
@@ -67,6 +79,7 @@ public class UI : MonoBehaviour
         score++;
         scoreText.text = "Score" + score;
 
+        // if all the candies collected, win
         if (score == numCandies)
         {
             GameOver(true);
@@ -123,15 +136,24 @@ public class UI : MonoBehaviour
 
     }
 
+    // resume button
+    public void Resume()
+    {
+        pausedUI.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     // restart button
     public void Restart()
-    { 
+    {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // menu button
     public void Menu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
 

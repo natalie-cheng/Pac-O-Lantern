@@ -11,6 +11,17 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
+    // instructions button
+    public void Instructions()
+    {
+        SceneManager.LoadScene("Instructions");
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     // quit button
     public void Quit()
     {

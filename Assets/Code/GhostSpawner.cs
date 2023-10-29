@@ -12,7 +12,7 @@ public class GhostSpawner : MonoBehaviour
     private float spawnSpeed = 0.95f;
 
     // radius of free space needed
-    private float radius = 15;
+    private float radius = 20;
 
     // tracking time
     private float currentTime;
