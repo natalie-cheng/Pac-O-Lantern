@@ -4,6 +4,7 @@
 #
 .DS_Store
 
+/[Pp]ackages/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
