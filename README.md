@@ -20,7 +20,7 @@ To play, open the project in the Unity Editor. It uses Unity 2022.3.10f1.
 
 Then, open the "Menu" scene, from which you can start the game.
 
-A build is also available to download in the "Build" folder of the repository, if you don't want to look at the code. Download and unzip the file, then run the application.
+A build is also available to download under releases, if you don't want to look at the code. Download and unzip the "Pac-O-Lantern" file, then run the application.
 
 There are more detailed gameplay instructions in the INSTRUCTIONS.pdf file.
 
